@@ -18,12 +18,12 @@ class AuthService {
     await this.getCsrfCookie();
     try {
         await this.api.post('standard-auth/login', credentials);
-        return { success: true };
+        return { success: true, message: 'Login successful' };
     } catch (error: any) {
         if (axios.isAxiosError(error) && error.response) {
           return { success: false, message: error.response.data.message || 'Error on Login' };
         }
-        return { success: false, message: 'Erro desconhecido' };
+        return { success: false, message: 'An unexpected error occurred' };
     }
   }
 }

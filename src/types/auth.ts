@@ -5,5 +5,5 @@ export interface Credentials {
 
 export interface LoginResult {
   success: boolean;
-  message?: string;
+  message: string;
 }
