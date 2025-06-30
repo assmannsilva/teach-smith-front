@@ -17,5 +17,15 @@ export const useAuthStore = defineStore('auth', {
             this.isLoading = false;
             return result;
         },
+
+        async loginWithGoogle(): Promise<LoginResult> {
+            this.isLoading = true;
+            this.error = null;
+            const result = await authService.loginWithGoogle();
+            this.error = result.success ? null : result.message;
+            this.isLoading = false;
+            return result;
+        }
+
     },
 });

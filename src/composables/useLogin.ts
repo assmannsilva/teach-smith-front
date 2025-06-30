@@ -16,10 +16,15 @@ export function useLogin() {
     }
   }
 
+  async function submitGoogleLogin() {
+    await auth.loginWithGoogle();
+  }
+
   return {
     email,
     password,
     submitLogin,
+    submitGoogleLogin,
     isLoading,
     errorMessage: error
   };

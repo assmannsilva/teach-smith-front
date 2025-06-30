@@ -26,6 +26,17 @@ class AuthService {
         return { success: false, message: 'An unexpected error occurred' };
     }
   }
+
+  public async loginWithGoogle(): Promise<LoginResult> {
+    try {
+      const { data } = await this.api.get('google-auth/generate-login-url');
+      window.location.href = data.url;
+      return { success: true, message: 'Redirecting to Google...' };
+    } catch (error: any) {
+      return { success: false, message: 'Failed to initiate Google login' };
+    }
+  }
+
 }
 
 export default new AuthService();
