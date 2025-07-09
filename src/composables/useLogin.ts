@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth.store';
 import { storeToRefs } from 'pinia';
+import router from '@/router';
 
 export function useLogin() {
   const auth = useAuthStore();
@@ -11,9 +12,7 @@ export function useLogin() {
 
   async function submitLogin() {
     await auth.login({ email: email.value, password: password.value });
-    if (!auth.error) {
-      console.log('Login efetuado!');
-    }
+    if (!auth.error) router.push({name: 'home'});
   }
 
   async function submitGoogleLogin() {

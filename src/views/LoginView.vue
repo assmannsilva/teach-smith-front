@@ -24,6 +24,12 @@ const urlErrorMessage = computed(() => {
       <div class="flex flex-col items-center">
         <Error :message="urlErrorMessage ?? ''" />
       </div>
+      <div class="flex justify-center mt-4 text-sm text-muted-foreground">
+        <span>Don't have an account?</span>
+        <RouterLink to="/create-organization" class="ml-2 text-primary hover:underline hover:text-primary/80 transition-colors">
+         Click Here to Register your Organization
+        </RouterLink>
+      </div>
     </div>
   </div>
 </template>
