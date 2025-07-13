@@ -1,9 +1,19 @@
 <script setup lang="ts">
+import { useGoogleAuth } from '@/composables/useGoogleAuth';
 import { useLogin } from '@/composables/useLogin';
-const { submitGoogleLogin, isLoading } = useLogin()
+const { submitGoogleRegistration, submitGoogleLogin, isLoading } = useGoogleAuth()
+
+const props = defineProps<{
+  type: 'login' | 'register'
+}>()
+
+function handleClick() {
+  if (props.type === 'login') return submitGoogleLogin()
+  submitGoogleRegistration()
+}
 </script>
 <template>
-    <button class="gsi-material-button"  @click="submitGoogleLogin" :disabled="isLoading">
+    <button class="gsi-material-button"  @click="handleClick" :disabled="isLoading">
         <div class="gsi-material-button-state"></div>
         <div class="gsi-material-button-content-wrapper">
             <div class="gsi-material-button-icon">
@@ -15,8 +25,8 @@ const { submitGoogleLogin, isLoading } = useLogin()
                 <path fill="none" d="M0 0h48v48H0z"></path>
             </svg>
             </div>
-            <span class="gsi-material-button-contents">Sign up with Google</span>
-            <span style="display: none;">Sign up with Google</span>
+            <span class="gsi-material-button-contents"> {{ props.type === 'login' ? 'Sign in with Google' : 'Sign up with Google' }}</span>
+            <span style="display: none;"> {{ props.type === 'login' ? 'Sign in with Google' : 'Sign up with Google' }}</span>
         </div>
     </button>
 </template>

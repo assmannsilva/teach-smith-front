@@ -19,7 +19,7 @@ const urlErrorMessage = computed(() => {
 
       <LoginCard />
       <div class="mx-auto">
-        <GoogleLoginButton />
+        <GoogleLoginButton type="login" />
       </div>
       <div class="flex flex-col items-center">
         <Error :message="urlErrorMessage ?? ''" />

@@ -15,15 +15,10 @@ export function useLogin() {
     if (!auth.error) router.push({name: 'home'});
   }
 
-  async function submitGoogleLogin() {
-    await auth.loginWithGoogle();
-  }
-
   return {
     email,
     password,
     submitLogin,
-    submitGoogleLogin,
     isLoading,
     errorMessage: error
   };
