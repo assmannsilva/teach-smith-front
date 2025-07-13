@@ -20,7 +20,7 @@ export function useCreateOrganization() {
       const response = await organizationService.createOrganization(payload);
       if (response.success) {
         localStorage.setItem('organization', JSON.stringify(response.organization));
-        router.push({ name: 'home' });
+        router.push({ name: 'register' });
       } else {
         errorMessage.value = response.message || 'Failed to create organization';
       }

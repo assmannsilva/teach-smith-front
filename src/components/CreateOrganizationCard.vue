@@ -28,7 +28,7 @@ const { organizationName, organizationFile, errorMessage, isLoading, createOrgan
         <CardContent class="px-10 py-8">
           <form @submit.prevent="createOrganization" class="flex flex-col gap-6">
             <div class="grid gap-2">
-              <Label for="organizationName">Nome de sua Organização</Label>
+              <Label for="organizationName">Organization Name</Label>
               <Input
                   id="organizationName"
                   type="text"
@@ -53,7 +53,7 @@ const { organizationName, organizationFile, errorMessage, isLoading, createOrgan
             <ErrorMessage :message="errorMessage ?? ''" />
 
             <Button type="submit" :disabled="isLoading">
-              Cadastrar
+              Continue with Registration
               <Loader2 v-if="isLoading" class="w-4 h-4 mr-2 animate-spin" />
             </Button>
         </form>
