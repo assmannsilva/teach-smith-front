@@ -1,5 +1,5 @@
 import api from '@/api/http';
-import type { Credentials, LoginResult } from '@/types/auth';
+import type { Credentials, LoginResult, RegisterPayload, RegisterResponse } from '@/types/auth';
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse } from 'axios';
 
@@ -30,6 +30,33 @@ class AuthService {
   public async loginWithGoogle(): Promise<LoginResult> {
     try {
       const { data } = await this.api.get('google-auth/generate-login-url');
+      window.location.href = data.url;
+      return { success: true, message: 'Redirecting to Google...' };
+    } catch (error: any) {
+      return { success: false, message: 'Failed to initiate Google login' };
+    }
+  }
+
+  public async register(payload: RegisterPayload): Promise<RegisterResponse> {
+    await this.getCsrfCookie();
+    try {
+      await this.api.post('standard-auth/register',payload);
+      return { success: true, message: 'Registration successful' };
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response) {
+        return { 
+          success: false, 
+          message: error.response.data.message || 'Error on Registration',
+          errors: error.response.data.errors || undefined
+        };
+      }
+      return { success: false, message: 'An unexpected error occurred' };
+    }
+  }
+
+    public async registerWithGoogle(organization_id: string): Promise<RegisterResponse> {
+    try {
+      const { data } = await this.api.get('google-auth/generate-register-url?organization_id='+organization_id);
       window.location.href = data.url;
       return { success: true, message: 'Redirecting to Google...' };
     } catch (error: any) {

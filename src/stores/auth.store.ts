@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { Credentials, LoginResult } from '@/types/auth';
+import type { Credentials, LoginResult, RegisterPayload, RegisterResponse } from '@/types/auth';
 import authService from '@/services/auth.service';
 
 export const useAuthStore = defineStore('auth', {
@@ -22,6 +22,24 @@ export const useAuthStore = defineStore('auth', {
             this.isLoading = true;
             this.error = null;
             const result = await authService.loginWithGoogle();
+            this.error = result.success ? null : result.message;
+            this.isLoading = false;
+            return result;
+        },
+
+        async register(payload: RegisterPayload): Promise<RegisterResponse> {
+            this.isLoading = true;
+            this.error = null;
+            const result = await authService.register(payload);
+            this.error = result.success ? null : result.message;
+            this.isLoading = false;
+            return result;
+        },
+
+        async registerWithGoogle(organization_id : string): Promise<RegisterResponse> {
+            this.isLoading = true;
+            this.error = null;
+            const result = await authService.registerWithGoogle(organization_id);
             this.error = result.success ? null : result.message;
             this.isLoading = false;
             return result;
