@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useGoogleAuth } from '@/composables/useGoogleAuth';
-import { useLogin } from '@/composables/useLogin';
 const { submitGoogleRegistration, submitGoogleLogin, isLoading } = useGoogleAuth()
 
 const props = defineProps<{
