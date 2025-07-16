@@ -1,25 +1,32 @@
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth.store';
-import { storeToRefs } from 'pinia';
 import router from '@/router';
+import authService from '@/services/auth.service';
 
 export function useLogin() {
   const auth = useAuthStore();
-   const { isLoading, error } = storeToRefs(auth);
 
   const email = ref('');
   const password = ref('');
 
   async function submitLogin() {
-    await auth.login({ email: email.value, password: password.value });
-    if (!auth.error) router.push({name: 'home'});
+    auth.setLoading(true)
+    auth.setError(null)
+
+    const result = await authService.login({ email: email.value, password: password.value })
+    const errorMessage = result.success ? null : result.message
+    
+    auth.setError(errorMessage)
+    auth.setLoading(false)
+
+    if(result.success) router.push({name: 'home'})
   }
 
   return {
     email,
     password,
     submitLogin,
-    isLoading,
-    errorMessage: error
+    isLoading : auth.isLoading,
+    errorMessage: auth.error
   };
 }

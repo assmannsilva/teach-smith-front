@@ -1,27 +1,38 @@
+import authService from '@/services/auth.service';
 import { useAuthStore } from '@/stores/auth.store';
 import { storeToRefs } from 'pinia';
 
 export function useGoogleAuth() {
   const auth = useAuthStore();
-  let { isLoading } = storeToRefs(auth);
 
   async function submitGoogleRegistration() {
     const organizationRaw = localStorage.getItem("organization")
     if(!organizationRaw) {
-      isLoading.value = false
+      auth.setError('Organização não encontrada')
       return ;
     }
     const organization = JSON.parse(organizationRaw)
-    await auth.registerWithGoogle(organization.id)
+    
+    auth.setLoading(true)
+    auth.setError(null)
+
+  	const result = await authService.registerWithGoogle(organization.id)
+  	if (!result.success) auth.setError(result.message)
+		auth.setLoading(false)
   }
+  
 
   async function submitGoogleLogin() {
-    await auth.loginWithGoogle();
+    auth.setLoading(true)
+    auth.setError(null)
+    const result = await authService.loginWithGoogle()
+    if (!result.success) auth.setError(result.message)
+    auth.setLoading(false)
   }
 
   return {
     submitGoogleRegistration,
     submitGoogleLogin,
-    isLoading,
+    isLoading: auth.isLoading,
   };
 }
