@@ -3,9 +3,8 @@ import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView.vue'
 import CreateOrganizationView from '@/views/CreateOrganizationView.vue'
 import UserRegistrationView from '@/views/UserRegistrationView.vue'
-import { fromTheme } from 'tailwind-merge'
-import authService from '@/services/auth.service'
 import { useProfile } from '@/composables/useProfile'
+import InviteStudentView from '@/views/Invite/InviteStudentView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,7 +34,14 @@ const router = createRouter({
       meta: {
         requiresAuth: true
       }
-      
+    },
+    {
+      path: '/invite-students',
+      name: 'invite-students',
+      component: InviteStudentView,
+      meta: {
+        requiresAuth: true
+      }
     },
   ],
 })

@@ -14,7 +14,9 @@ import Separator from "@/components/ui/separator/Separator.vue";
           <Separator orientation="vertical" class="mr-2 h-4" />
         </div>
       </header>
-      <slot />
+      <div class="p-12">
+        <slot />
+      </div>
     </SidebarInset>
   </SidebarProvider>
 </template>
