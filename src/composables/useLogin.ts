@@ -9,7 +9,7 @@ export function useLogin() {
 
   const email = ref('');
   const password = ref('');
-   const { error, isLoading } = storeToRefs(auth);
+  const { error, isLoading } = storeToRefs(auth);
 
   async function submitLogin() {
     auth.setLoading(true)

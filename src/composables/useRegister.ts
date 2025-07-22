@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth.store';
 import router from '@/router';
 import authService from '@/services/auth.service';
+import { storeToRefs } from 'pinia';
 
 export function useRegister() {
   const auth = useAuthStore();
@@ -19,6 +20,8 @@ export function useRegister() {
     email: "",
     passwordConfirmation: ""
   } );
+
+  const { error, isLoading } = storeToRefs(auth);
 
   async function submitRegister() {
     const organizationRaw = localStorage.getItem("organization")
@@ -40,10 +43,12 @@ export function useRegister() {
        organization_id: organization.id
     });
 
+    const errorMessage = result.success ? null : result.message
+    auth.setError(errorMessage)
     auth.setLoading(false)
     
     if (result.success) router.push({name: 'home'});
-    auth.setError(result.message)
+    
 
     if(result.errors) {
       errorsObject.value = {
@@ -63,8 +68,8 @@ export function useRegister() {
     password,
     passwordConfirmation,
     submitRegister,
-    isLoading: auth.isLoading,
-    errorMessage: auth.error,
+    isLoading,
+    errorMessage: error,
     errorsObject
   };
 }
