@@ -3,25 +3,33 @@ import { Send } from "lucide-vue-next"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar'
 import MainSidebarContent from "./MainSidebarContent.vue";
-
+import { useAuthStore } from "@/stores/auth.store";
+import UserMenu from "./UserMenu.vue";
+import SidebarFooter from "../ui/sidebar/SidebarFooter.vue";
+const auth = useAuthStore()
 
 // Menu items.
 const sidebarData = {
   user: {
-    name: 'Cauê',
-    email: 'caue@example.com',
+    name: auth.loggedUser?.first_name + " " + auth.loggedUser?.surname,
+    email: auth.loggedUser?.email,
+  },
+  organization: {
+    name: auth.loggedOrganization?.name,
+    logo: import.meta.env.VITE_API_URL + "organization_logo"
   },
   navMain: [
     {
       title: 'Invites',
       url: '#',
       icon: Send,
-      isActive: true,
+      isActive: false,
       items: [
         {
           title: 'Invite Teachers',
@@ -40,13 +48,17 @@ const sidebarData = {
 <template>
    <Sidebar>
     <SidebarHeader>
-      Teste
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <UserMenu :user="sidebarData.user" :organization="sidebarData.organization"/>
+        </SidebarMenuItem>
+      </SidebarMenu>
     </SidebarHeader>
     <SidebarContent>
       <MainSidebarContent :items="sidebarData.navMain" />
     </SidebarContent>
-    <SidebarFooter>
-      Teste
+     <SidebarFooter>
+      Teach Smith
     </SidebarFooter>
     <SidebarRail />
   </Sidebar>

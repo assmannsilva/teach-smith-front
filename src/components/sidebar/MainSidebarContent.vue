@@ -9,7 +9,6 @@ import {
 
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -35,7 +34,6 @@ defineProps<{
 
 <template>
   <SidebarGroup>
-    <SidebarGroupLabel>Teach Smith</SidebarGroupLabel>
     <SidebarMenu>
       <Collapsible
         v-for="item in items"
