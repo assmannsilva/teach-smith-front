@@ -1,5 +1,5 @@
 import api from '@/api/http';
-import type { Credentials, LoginResult, RegisterPayload, RegisterResponse } from '@/types/auth';
+import type { Credentials, LoginResult, ProfileResponse, RegisterPayload, RegisterResponse } from '@/types/auth';
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse } from 'axios';
 
@@ -54,13 +54,35 @@ class AuthService {
     }
   }
 
-    public async registerWithGoogle(organization_id: string): Promise<RegisterResponse> {
+  public async registerWithGoogle(organization_id: string): Promise<RegisterResponse> {
     try {
       const { data } = await this.api.get('google-auth/generate-register-url?organization_id='+organization_id);
       window.location.href = data.url;
       return { success: true, message: 'Redirecting to Google...' };
     } catch (error: any) {
       return { success: false, message: 'Failed to initiate Google login' };
+    }
+  }
+
+  public async logout() : Promise<boolean> {
+    try {
+      await this.api.delete("api/profile/")
+      return true
+    } catch (error: any) {
+      return false
+    }
+  }
+
+  public async getProfile() : Promise<ProfileResponse> {
+    try {
+      const { data } = await this.api.get("api/profile/")
+      return {
+        success: true,
+        user: data.user,
+        organization: data.organization
+      }
+    } catch (error: any) {
+      return { success: false };
     }
   }
 

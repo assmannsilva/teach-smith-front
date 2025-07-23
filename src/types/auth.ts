@@ -1,3 +1,5 @@
+import type { Organization } from "./organization";
+
 export interface Credentials {
   email: string;
   password: string;
@@ -29,4 +31,20 @@ export interface RegisterValidationErrors {
   first_name?: string[] | undefined,
   surname?: string[] | undefined,
   password_confirmation?: string[] | undefined,
+}
+
+export interface User {
+  email: string;
+  first_name: string;
+  surname: string;
+  role: string;
+  created_at: string;
+  updated_at: string;
+
+}
+
+export interface ProfileResponse {
+  success: boolean;
+  user?: User;
+  organization?: Organization
 }

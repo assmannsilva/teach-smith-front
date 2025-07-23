@@ -18,7 +18,6 @@ export function useGoogleAuth() {
 
   	const result = await authService.registerWithGoogle(organization.id)
   	if (!result.success) auth.setError(result.message)
-		auth.setLoading(false)
   }
   
 
@@ -27,7 +26,6 @@ export function useGoogleAuth() {
     auth.setError(null)
     const result = await authService.loginWithGoogle()
     if (!result.success) auth.setError(result.message)
-    auth.setLoading(false)
   }
 
   return {

@@ -13,7 +13,7 @@ export interface CreateOrganizationResponse {
 export interface Organization {
   id: number;
   name: string;
-  file_url: string | null;
+  logo_url: string | null;
   created_at: string;
   updated_at: string;
 }   
