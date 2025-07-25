@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUploadInvitesFile } from '@/composables/useUploadInvitesFile';
-import { ref, nextTick } from 'vue';
+import { ref } from 'vue';
 import Card from '@/components/ui/card/Card.vue'
 import CardHeader from '@/components/ui/card/CardHeader.vue'
 import CardTitle from '@/components/ui/card/CardTitle.vue'
@@ -9,7 +9,6 @@ import { Loader2 } from 'lucide-vue-next';
 import Button from '../ui/button/Button.vue';
 import Input from '../ui/input/Input.vue';
 import Label from '../ui/label/Label.vue';
-import ErrorMessage from '../ui/Error.vue';
 
 const isLoading = ref(false)
 const { errors, status, dispatchedCount, importFile, inviteMultipleStudents  } = useUploadInvitesFile()
