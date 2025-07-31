@@ -12,6 +12,9 @@ import MainSidebarContent from "./MainSidebarContent.vue";
 import { useAuthStore } from "@/stores/auth.store";
 import UserMenu from "./UserMenu.vue";
 import SidebarFooter from "../ui/sidebar/SidebarFooter.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute()
 const auth = useAuthStore()
 
 // Menu items.
@@ -29,15 +32,15 @@ const sidebarData = {
       title: 'Invites',
       url: '#',
       icon: Send,
-      isActive: false,
+      isActive: route.path.includes("invite"),
       items: [
         {
           title: 'Invite Teachers',
-          url: '#',
+          url: '/invite/teachers',
         },
         {
           title: 'Invite Students',
-          url: '#',
+          url: '/invite/students',
         },
       ],
     },

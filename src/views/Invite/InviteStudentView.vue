@@ -6,6 +6,9 @@ import MainLayout from '@/layouts/MainLayout.vue';
 
 <template>
   <MainLayout>
+      <div class="mb-6">
+        <h1 class="text-2xl font-semibold text-gray-800">Invite Students</h1>
+      </div>
       <div class="grid grid-cols-2 gap-6">
         <div>
           <FileUploadCard type="student"/>

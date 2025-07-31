@@ -37,7 +37,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/invite-students',
+      path: '/invite/students',
       name: 'invite-students',
       component: InviteStudentView,
       meta: {
@@ -45,7 +45,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/invite-teachers',
+      path: '/invite/teachers',
       name: 'invite-teachers',
       component: InviteTeacherView,
       meta: {
