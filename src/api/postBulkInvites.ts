@@ -11,7 +11,7 @@ export async function postBulkInvites(endpoint: string, file: File): Promise<Bul
       headers: { 'Content-Type': 'multipart/form-data' },
     });
 
-    const statusMessage = status === 200 ? "success" : (status === 207 ? "partial" : "failed");
+    const statusMessage = status === 200 ? "success" : (status === 207 ? "partial" : "error");
 
     return {
       status: statusMessage,
@@ -21,14 +21,14 @@ export async function postBulkInvites(endpoint: string, file: File): Promise<Bul
   } catch (error: any) {
     if (axios.isAxiosError(error) && error.response) {
       return {
-        status: "failed",
+        status: "error",
         dispatched: null,
         errors: error.response.data.errors || ['An unexpected error occurred'],
       };
     }
 
     return {
-      status: "failed",
+      status: "error",
       dispatched: null,
       errors: ['An unexpected error occurred'],
     };

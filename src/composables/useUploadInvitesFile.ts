@@ -1,18 +1,20 @@
 import studentService from "@/services/student.service";
 import teacherService from "@/services/teacher.service";
-import type { BulkInviteResponse, BulkInviteStatus } from "@/types/invites";
+import type { StatusMessage } from "@/types";
+import type { BulkInviteResponse } from "@/types/invites";
 import { ref } from "vue";
 
 export function useUploadInvitesFile() {
   const importFile = ref<File | null>(null);
-
-  const status = ref<BulkInviteStatus | null>(null);
-  const dispatchedCount = ref< number| null >(0);
+  const statusMessage = ref<StatusMessage | null>(null);
   const errors = ref<string[] | null>(null);
 
   async function setResponseToProperties(response: BulkInviteResponse) {
-    status.value = response.status;
-    dispatchedCount.value = response.dispatched
+
+    statusMessage.value = {
+      type: response.status,
+      text: response.dispatched == 0 || response.dispatched == null ? "None invites dispatched" : response.dispatched + " invites dispatched"
+    }
     errors.value = response.errors
   }
 
@@ -30,8 +32,7 @@ export function useUploadInvitesFile() {
 
   return {
     importFile,
-    status,
-    dispatchedCount,
+    statusMessage,
     errors,
     inviteMultipleStudents,
     inviteMultipleTeachers

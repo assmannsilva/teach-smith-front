@@ -9,9 +9,10 @@ import { Loader2 } from 'lucide-vue-next';
 import Button from '../ui/button/Button.vue';
 import Input from '../ui/input/Input.vue';
 import Label from '../ui/label/Label.vue';
+import StatusMessage from '../ui/StatusMessage.vue';
 
 const isLoading = ref(false)
-const { errors, status, dispatchedCount, importFile, inviteMultipleStudents, inviteMultipleTeachers  } = useUploadInvitesFile()
+const { errors, statusMessage, importFile, inviteMultipleStudents, inviteMultipleTeachers  } = useUploadInvitesFile()
 
 const props = defineProps<{
   type: 'student' | 'teacher'
@@ -62,6 +63,7 @@ async function handleClick() {
                 <li v-for="(error, i) in errors" :key="i">{{ error }}</li>
               </ul>
             </div>
+            <StatusMessage :message="statusMessage"/>
 
             <Button type="submit" :disabled="isLoading || !importFile">
               Import File

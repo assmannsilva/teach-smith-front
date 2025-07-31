@@ -4,7 +4,7 @@ export interface BulkInviteResponse {
 	status: BulkInviteStatus
 }
 
-export type BulkInviteStatus = 'failed' | 'success' | 'partial';
+export type BulkInviteStatus = 'error' | 'success' | 'partial';
 
 export interface InviteStudentPayload {
 	email: string;

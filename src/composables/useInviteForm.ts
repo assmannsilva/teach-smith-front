@@ -1,13 +1,10 @@
 import { reactive, toRefs, ref } from 'vue';
 import camelCase from 'lodash.camelcase';
 import type { InviteStudentResponse, InviteStudentValidationErrors, InviteTeacherResponse, InviteTeacherValidationErrors } from '@/types/invites';
+import type { StatusMessage } from '@/types';
 
 type ErrorsObject = Record<string, string>;
 type SubmitCallback = () => Promise<InviteStudentResponse | InviteTeacherResponse>;
-type StatusMessage = {
-  text:  string,
-  type: "error" | "success" | "partial"
-}
 
 export function useInviteForm<T extends Record<string, any>>(initialData: T) {
   
