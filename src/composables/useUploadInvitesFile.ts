@@ -1,4 +1,5 @@
 import studentService from "@/services/student.service";
+import teacherService from "@/services/teacher.service";
 import type { BulkInviteResponse, BulkInviteStatus } from "@/types/invites";
 import { ref } from "vue";
 
@@ -21,11 +22,18 @@ export function useUploadInvitesFile() {
     setResponseToProperties(response)
   }
 
+  async function inviteMultipleTeachers() {
+    if(!importFile.value) return;
+    const response = await teacherService.bulkInvite(importFile.value)
+    setResponseToProperties(response)
+  }
+
   return {
     importFile,
     status,
     dispatchedCount,
     errors,
-    inviteMultipleStudents
+    inviteMultipleStudents,
+    inviteMultipleTeachers
   };
 }

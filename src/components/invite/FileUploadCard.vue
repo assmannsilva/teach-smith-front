@@ -11,7 +11,7 @@ import Input from '../ui/input/Input.vue';
 import Label from '../ui/label/Label.vue';
 
 const isLoading = ref(false)
-const { errors, status, dispatchedCount, importFile, inviteMultipleStudents  } = useUploadInvitesFile()
+const { errors, status, dispatchedCount, importFile, inviteMultipleStudents, inviteMultipleTeachers  } = useUploadInvitesFile()
 
 const props = defineProps<{
   type: 'student' | 'teacher'
@@ -25,7 +25,9 @@ function onFileChange(event: Event) {
 async function handleClick() {
   isLoading.value = true;
   try {
-    await inviteMultipleStudents();
+    if(props.type == "student") await inviteMultipleStudents();
+    else await inviteMultipleTeachers()
+    
     importFile.value = null;
   } 
   finally {
