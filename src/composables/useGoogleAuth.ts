@@ -1,6 +1,5 @@
 import authService from '@/services/auth.service';
 import { useAuthStore } from '@/stores/auth.store';
-import { storeToRefs } from 'pinia';
 
 export function useGoogleAuth() {
   const auth = useAuthStore();
