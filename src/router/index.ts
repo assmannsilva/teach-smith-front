@@ -4,8 +4,8 @@ import HomeView from '@/views/HomeView.vue'
 import CreateOrganizationView from '@/views/CreateOrganizationView.vue'
 import UserRegistrationView from '@/views/UserRegistrationView.vue'
 import { useProfile } from '@/composables/useProfile'
-import InviteStudentView from '@/views/Invite/InviteStudentView.vue'
-import InviteTeacherView from '@/views/Invite/InviteTeacherView.vue'
+import InviteStudentView from '@/views/invite/InviteStudentView.vue'
+import InviteTeacherView from '@/views/invite/InviteTeacherView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
