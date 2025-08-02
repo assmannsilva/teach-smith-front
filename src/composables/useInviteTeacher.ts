@@ -1,5 +1,6 @@
-import { useInviteForm } from '@/composables/useInviteForm';
+import { useGeneralForm } from '@/composables/useGeneralForm';
 import teacherService from '@/services/teacher.service';
+import type { GeneralResponse } from '@/types';
 
 export function useInviteTeacher() {
   const {
@@ -14,7 +15,7 @@ export function useInviteTeacher() {
     handleSubmit,
     resetForm,
     statusMessage
-  } = useInviteForm({
+  } = useGeneralForm({
     firstName: '',
     surname: '',
     email: '',
@@ -34,7 +35,7 @@ export function useInviteTeacher() {
         hire_date: hireDate.value,
       });
 
-      return result;
+      return result as GeneralResponse;
     });
   }
 

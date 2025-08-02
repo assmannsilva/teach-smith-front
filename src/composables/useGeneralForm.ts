@@ -1,14 +1,12 @@
 import { reactive, toRefs, ref } from 'vue';
 import camelCase from 'lodash.camelcase';
-import type { InviteStudentResponse, InviteStudentValidationErrors, InviteTeacherResponse, InviteTeacherValidationErrors } from '@/types/invites';
-import type { StatusMessage } from '@/types';
+import type { ErrorsObject, GeneralErrorValidation, GeneralResponse, StatusMessage } from '@/types';
 
-type ErrorsObject = Record<string, string>;
-type SubmitCallback = () => Promise<InviteStudentResponse | InviteTeacherResponse>;
+type SubmitCallback = () => Promise<GeneralResponse>;
 
-export function useInviteForm<T extends Record<string, any>>(initialData: T) {
+export function useGeneralForm<T extends Record<string, any>>(initialData: T) {
   
-  const formData = reactive({ ...initialData });
+  const formData = toRefs(reactive({ ...initialData }));
   const errors = reactive<ErrorsObject>({});
   const isLoading = ref(false);
   const statusMessage = ref<StatusMessage | null>(null);
@@ -17,7 +15,7 @@ export function useInviteForm<T extends Record<string, any>>(initialData: T) {
     for (const key in errors) delete errors[key];
   }
 
-  function mapApiErrors(apiErrors: InviteStudentValidationErrors | InviteTeacherValidationErrors) {
+  function mapApiErrors(apiErrors: GeneralErrorValidation) {
     const mapApiKeys = apiErrors as any;
     for (const key in mapApiKeys) {
       const camelKey = camelCase(key);
@@ -49,7 +47,7 @@ export function useInviteForm<T extends Record<string, any>>(initialData: T) {
   }
 
   return {
-    ...toRefs(formData), // expõe os campos como refs para facilitar uso no template
+    ...formData,
     errors,
     isLoading,
     statusMessage,
