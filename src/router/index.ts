@@ -6,6 +6,8 @@ import UserRegistrationView from '@/views/UserRegistrationView.vue'
 import { useProfile } from '@/composables/useProfile'
 import InviteStudentView from '@/views/invite/InviteStudentView.vue'
 import InviteTeacherView from '@/views/invite/InviteTeacherView.vue'
+import CreateClassroomView from '@/views/classroom/CreateClassroomView.vue'
+import ListClassroomView from '@/views/classroom/ListClassroomView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,6 +50,22 @@ const router = createRouter({
       path: '/invite/teachers',
       name: 'invite-teachers',
       component: InviteTeacherView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/classrooms/',
+      name: 'classrooms.list',
+      component: ListClassroomView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/classrooms/create',
+      name: 'classrooms.create',
+      component: CreateClassroomView,
       meta: {
         requiresAuth: true
       }
