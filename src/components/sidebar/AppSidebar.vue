@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Send } from "lucide-vue-next"
+import { Book, Presentation, Send } from "lucide-vue-next"
 import {
   Sidebar,
   SidebarContent,
@@ -41,6 +41,22 @@ const sidebarData = {
         {
           title: 'Invite Students',
           url: '/invite/students',
+        },
+      ],
+    },
+    {
+      title: 'Classrooms',
+      url: '#',
+      icon: Presentation,
+      isActive: route.path.includes("classrooms"),
+      items: [
+        {
+          title: 'List Classrooms',
+          url: '/classrooms/',
+        },
+        {
+          title: 'Create Classroom',
+          url: '/classrooms/create',
         },
       ],
     },
