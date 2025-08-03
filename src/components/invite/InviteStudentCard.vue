@@ -11,17 +11,17 @@ import Label from '../ui/label/Label.vue';
 import { useInviteStudent } from '@/composables/useInviteStudent';
 
 import ErrorMessage from '../ui/Error.vue'
+import StatusMessage from '../ui/StatusMessage.vue';
 
 const isLoading = ref(false)
 const inviteSuccess = ref(false)
 
-const { errorsObject, firstName, registrationCode, surname, email, section, grade, admissionDate, inviteStudent  } = useInviteStudent()
+const { errors, statusMessage, firstName, registrationCode, surname, email, section, grade, admissionDate, inviteStudent  } = useInviteStudent()
 
 async function handleClick() {
   isLoading.value = true
   inviteSuccess.value = await inviteStudent()
   isLoading.value = false
-  console.log(errorsObject.value)
 }
 
 </script>
@@ -35,44 +35,46 @@ async function handleClick() {
         <div class="grid gap-2">
           <Label for="firstName">First Name</Label>
           <Input id="firstName" v-model="firstName" :tabindex="1" />
-          <ErrorMessage :message="errorsObject.firstName" />
+          <ErrorMessage :message="errors.firstName" />
         </div>
 
         <div class="grid gap-2">
           <Label for="surname">Surname</Label>
           <Input id="surname" v-model="surname" :tabindex="2" />
-          <ErrorMessage :message="errorsObject.surname" />
+          <ErrorMessage :message="errors.surname" />
         </div>
 
         <div class="grid gap-2">
           <Label for="email">Email</Label>
           <Input id="email" v-model="email" type="email" :tabindex="3" />
-          <ErrorMessage :message="errorsObject.email" />
+          <ErrorMessage :message="errors.email" />
         </div>
 
         <div class="grid gap-2">
           <Label for="grade">Grade</Label>
           <Input id="grade" v-model="grade" :tabindex="4" />
-          <ErrorMessage :message="errorsObject.grade" />
+          <ErrorMessage :message="errors.grade" />
         </div>
 
         <div class="grid gap-2">
           <Label for="section">Section</Label>
           <Input id="section" v-model="section" :tabindex="5" />
-          <ErrorMessage :message="errorsObject.section" />
+          <ErrorMessage :message="errors.section" />
         </div>
 
         <div class="grid gap-2">
           <Label for="admissionDate">Admission Date</Label>
           <Input id="admissionDate" v-model="admissionDate" type="date" :tabindex="6" />
-          <ErrorMessage :message="errorsObject.admissionDate" />
+          <ErrorMessage :message="errors.admissionDate" />
         </div>
 
         <div class="grid gap-2">
           <Label for="registrationCode">Registration Code</Label>
           <Input id="registrationCode" v-model="registrationCode" :tabindex="7" />
-          <ErrorMessage :message="errorsObject.registrationCode" />
+          <ErrorMessage :message="errors.registrationCode" />
         </div>
+
+        <StatusMessage :message="statusMessage" />
 
         <Button type="submit" :disabled="isLoading">
           Invite Student
