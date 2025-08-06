@@ -29,14 +29,14 @@ Este projeto é parte de uma aplicação full-stack.
 
 ## 📂 Estrutura
 
-src/
-components/ # Componentes reutilizáveis
-views/ # Páginas da aplicação
-api/ # Integração com backend
-services/ # Lógica de negócio
-stores/ # Estado global com Pinia
-types/ # Tipagens globais
-utils/ # Funções auxiliares
+- src/
+- components/ # Componentes reutilizáveis
+- views/ # Páginas da aplicação
+- api/ # Integração com backend
+- services/ # Lógica de negócio
+- stores/ # Estado global com Pinia
+- types/ # Tipagens globais
+- utils/ # Funções auxiliares
 
 
 ## ▶️ Executando Localmente
