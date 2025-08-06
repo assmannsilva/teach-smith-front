@@ -1,39 +1,65 @@
-# teach-smith-front
+# Teach Smith – Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Interface web do sistema **Teach Smith**, desenvolvida com [Vue 3](https://vuejs.org/) + [Vite](https://vitejs.dev/).
 
-## Recommended IDE Setup
+![Teach Smith Screenshot](./exemplo_imagem.png)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🧾 Sobre o Projeto
 
-## Type Support for `.vue` Imports in TS
+Plataforma de gestão educacional com foco em:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Organização de turmas, alunos e professores  
+- Cadastro de organizações  
+- Acesso com autenticação via Google ou formulário  
+- Interface moderna, responsiva e funcional  
 
-## Customize configuration
+Este projeto é parte de uma aplicação full-stack.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+👉 Veja também o repositório do back-end:  
+[🔗 Teach Smith API (Laravel)](https://github.com/assmannsilva/teach-smith-api)
 
-## Project Setup
+## 🚀 Tecnologias
 
-```sh
+- **Vue 3** + **Vite**  
+- **TypeScript**  
+- **Pinia** – gerenciamento de estado  
+- **Vue Router**  
+- **Vitest** – testes unitários  
+- **Docker** – ambiente containerizado  
+
+## 📂 Estrutura
+
+src/
+components/ # Componentes reutilizáveis
+views/ # Páginas da aplicação
+api/ # Integração com backend
+services/ # Lógica de negócio
+stores/ # Estado global com Pinia
+types/ # Tipagens globais
+utils/ # Funções auxiliares
+
+
+## ▶️ Executando Localmente
+
+```bash
+# Instalar dependências
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Rodar em modo desenvolvimento
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+# Build para produção
 npm run build
+
+# Ou com Docker
+docker-compose up -d
+
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+Crie um arquivo .env e adicione 
 
-```sh
-npm run test:unit
+``` bash
+VITE_API_URL=http://localhost:8000/
 ```
+👤 Autor
+Desenvolvido por Cauê Assmann Silva
